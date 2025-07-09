@@ -45,6 +45,25 @@
             <span class="pcw-progress-text" id="progressText">Progreso: 0%</span>
         </div>
 
+        <!-- Indicadores de estado de conexión -->
+        <div class="pcw-status-indicators">
+            <div class="pcw-status-indicator" id="aiStatus">
+                <svg class="pcw-status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                </svg>
+                <span class="pcw-status-text">IA</span>
+                <div class="pcw-status-dot pcw-status-disconnected"></div>
+            </div>
+            
+            <div class="pcw-status-indicator" id="scormStatus">
+                <svg class="pcw-status-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+                </svg>
+                <span class="pcw-status-text">LMS</span>
+                <div class="pcw-status-dot pcw-status-disconnected"></div>
+            </div>
+        </div>
+
         <main class="pcw-main-content">
             <div class="pcw-panel pcw-panel-creation">
                 <h2 class="pcw-section-title">
@@ -124,6 +143,8 @@
         let currentScore = 0;
         let totalAttempts = 0;
         let isActivityCompleted = false;
+        let aiConnected = false;
+        let scormConnected = false;
 
         const widget = document.querySelector('.prompt-creation-widget');
 
@@ -868,10 +889,73 @@ RECUERDA: Sé estricto y objetivo. Solo asigna puntos cuando el criterio se cump
             throw new Error("Respuesta de API inválida.");
         }
         
+        // Funciones para indicadores de estado
+        function updateAIStatus(status) {
+            const aiIndicator = widget.querySelector('#aiStatus .pcw-status-dot');
+            const aiIcon = widget.querySelector('#aiStatus .pcw-status-icon');
+            
+            if (!aiIndicator || !aiIcon) return;
+            
+            // Remover clases anteriores
+            aiIndicator.classList.remove('pcw-status-connected', 'pcw-status-disconnected', 'pcw-status-connecting');
+            
+            switch(status) {
+                case 'connected':
+                    aiIndicator.classList.add('pcw-status-connected');
+                    aiIcon.style.color = '#22c55e';
+                    aiConnected = true;
+                    console.log("🤖 IA: Conectada");
+                    break;
+                case 'connecting':
+                    aiIndicator.classList.add('pcw-status-connecting');
+                    aiIcon.style.color = '#f59e0b';
+                    console.log("🤖 IA: Conectando...");
+                    break;
+                case 'disconnected':
+                default:
+                    aiIndicator.classList.add('pcw-status-disconnected');
+                    aiIcon.style.color = '#ef4444';
+                    aiConnected = false;
+                    console.log("🤖 IA: Desconectada");
+                    break;
+            }
+        }
+
+        function updateScormStatus(status) {
+            const scormIndicator = widget.querySelector('#scormStatus .pcw-status-dot');
+            const scormIcon = widget.querySelector('#scormStatus .pcw-status-icon');
+            
+            if (!scormIndicator || !scormIcon) return;
+            
+            // Remover clases anteriores
+            scormIndicator.classList.remove('pcw-status-connected', 'pcw-status-disconnected', 'pcw-status-connecting');
+            
+            switch(status) {
+                case 'connected':
+                    scormIndicator.classList.add('pcw-status-connected');
+                    scormIcon.style.color = '#22c55e';
+                    scormConnected = true;
+                    console.log("🎓 LMS: Conectado");
+                    break;
+                case 'connecting':
+                    scormIndicator.classList.add('pcw-status-connecting');
+                    scormIcon.style.color = '#f59e0b';
+                    console.log("🎓 LMS: Conectando...");
+                    break;
+                case 'disconnected':
+                default:
+                    scormIndicator.classList.add('pcw-status-disconnected');
+                    scormIcon.style.color = '#ef4444';
+                    scormConnected = false;
+                    console.log("🎓 LMS: Desconectado");
+                    break;
+            }
+        }
+
         function validateAndCorrectEvaluation(evaluation) {
             // Validar que la evaluación tenga la estructura correcta
             if (!evaluation || !evaluation.feedback || !Array.isArray(evaluation.feedback)) {
-                console.error("Estructura de evaluación inválida");
+                console.error("❌ Estructura de evaluación inválida");
                 return {
                     score: 0,
                     feedback: [
@@ -881,36 +965,50 @@ RECUERDA: Sé estricto y objetivo. Solo asigna puntos cuando el criterio se cump
                 };
             }
             
-            // Calcular puntaje real basado en criterios cumplidos
+            // CRÍTICO: Calcular puntaje real basado en criterios cumplidos
             let calculatedScore = 0;
-            const correctedFeedback = evaluation.feedback.map(item => {
-                // Asegurar que fulfilled sea booleano
-                const fulfilled = item.fulfilled === true || item.fulfilled === 'true';
+            const correctedFeedback = evaluation.feedback.map((item, index) => {
+                // Asegurar que fulfilled sea booleano estricto
+                const fulfilled = item.fulfilled === true || item.fulfilled === 'true' || item.fulfilled === 1;
                 if (fulfilled) {
-                    calculatedScore += 10;
+                    calculatedScore += 10; // Cada criterio vale exactamente 10 puntos
                 }
+                
+                console.log(`✓ Criterio ${index + 1}: ${fulfilled ? '10 puntos' : '0 puntos'} - ${item.criterion}`);
+                
                 return {
-                    criterion: item.criterion || "Criterio sin nombre",
+                    criterion: item.criterion || `Criterio ${index + 1}`,
                     fulfilled: fulfilled,
                     justification: item.justification || "Sin justificación proporcionada"
                 };
             });
             
-            // Verificar consistencia
-            const reportedScore = evaluation.score || 0;
+            // Verificar consistencia con puntaje reportado por IA
+            const reportedScore = parseInt(evaluation.score) || 0;
             if (calculatedScore !== reportedScore) {
-                console.warn(`🔧 Corrección automática: IA reportó ${reportedScore} puntos, cálculo real ${calculatedScore} puntos`);
+                console.warn(`🔧 CORRECCIÓN CRÍTICA: IA reportó ${reportedScore} puntos, cálculo real ${calculatedScore} puntos`);
+                console.warn(`📊 Desglose: ${correctedFeedback.map((item, i) => `C${i+1}:${item.fulfilled ? 10 : 0}`).join(' + ')} = ${calculatedScore}`);
             }
             
             // Validar que tengamos exactamente 4 criterios
             if (correctedFeedback.length !== 4) {
                 console.error(`⚠️ Error: Se esperaban 4 criterios, pero se recibieron ${correctedFeedback.length}`);
+                
+                // Rellenar criterios faltantes
+                while (correctedFeedback.length < 4) {
+                    correctedFeedback.push({
+                        criterion: `Criterio ${correctedFeedback.length + 1} (no evaluado)`,
+                        fulfilled: false,
+                        justification: "Este criterio no pudo ser evaluado correctamente."
+                    });
+                }
             }
             
             console.log(`✅ Validación completada: ${calculatedScore}/40 puntos (${Math.round((calculatedScore/40)*100)}%)`);
+            console.log(`📋 Criterios cumplidos: ${correctedFeedback.filter(item => item.fulfilled).length}/4`);
             
             return {
-                score: calculatedScore, // Usar el puntaje calculado, no el reportado
+                score: calculatedScore, // USAR SIEMPRE EL PUNTAJE CALCULADO, NO EL REPORTADO
                 feedback: correctedFeedback,
                 ideal_structure: evaluation.ideal_structure || { "Error": "Estructura ideal no disponible" }
             };
