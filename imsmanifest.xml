@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest identifier="tutor_mo_ia_scorm_2025" version="1.0" 
+<manifest identifier="tutor_mo_ia_scorm_2025_v2.0" version="2.0" 
     xmlns="http://www.imsglobal.org/xsd/imscp_v1p1" 
     xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3" 
     xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3" 
@@ -23,10 +23,8 @@
             <title>¿Qué aprendimos? Práctica de Prompts con IA</title>
             <item identifier="item_1" identifierref="resource_1">
                 <title>Módulo: Práctica de Prompts</title>
-                <adlcp:prerequisites type="aicc_prerequisite"></adlcp:prerequisites>
                 <adlcp:maxtimeallowed>PT2H</adlcp:maxtimeallowed>
                 <adlcp:timelimitaction>continue,no message</adlcp:timelimitaction>
-                <adlcp:datafromlms></adlcp:datafromlms>
                 <adlcp:masteryscore>60</adlcp:masteryscore>
             </item>
         </organization>
@@ -36,14 +34,10 @@
         <resource identifier="resource_1" type="webcontent" adlcp:scormtype="sco" href="index.html">
             <file href="index.html"/>
             <file href="css/styles.css"/>
-            <file href="js/scorm_api.js"/>
             <file href="js/config.js"/>
+            <file href="js/scorm_api.js"/>
+            <file href="js/main.js"/>
             <file href="metadata.xml"/>
-            <dependency identifierref="common_files"/>
-        </resource>
-        
-        <resource identifier="common_files" type="webcontent">
-            <file href="README.md"/>
         </resource>
     </resources>
 
