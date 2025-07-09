@@ -1,79 +1,41 @@
+// File: metadata.xml
+// This file contains metadata for the SCORM package
+// Created by: Francisco Sereño
+// Date: 2025-07-10
+// Description: Metadata for the interactive learning activity on effective AI prompts
+// License: CC BY-NC-SA 4.0
+
 <?xml version="1.0" encoding="UTF-8"?>
 <lom xmlns="http://ltsc.ieee.org/xsd/LOM" 
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
      xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lomv1.0/lom.xsd">
 
     <general>
-        <identifier>
-            <catalog>URI</catalog>
-            <entry>tutor_mo_ia_scorm_2025</entry>
-        </identifier>
-        <title>
-            <string language="es">¿Qué aprendimos? Práctica de Prompts con IA</string>
-        </title>
+        <identifier><catalog>URI</catalog><entry>tutor_mo_ia_scorm_2025_v2.1</entry></identifier>
+        <title><string language="es">¿Qué aprendimos? Práctica de Prompts con IA</string></title>
         <language>es</language>
-        <description>
-            <string language="es">Actividad interactiva para practicar y evaluar la redacción de prompts efectivos para inteligencia artificial. Los estudiantes seleccionan escenarios específicos, redactan prompts y reciben retroalimentación automática basada en criterios académicos establecidos.</string>
-        </description>
-        <keyword>
-            <string language="es">prompts</string>
-        </keyword>
-        <keyword>
-            <string language="es">inteligencia artificial</string>
-        </keyword>
-        <keyword>
-            <string language="es">comunicación</string>
-        </keyword>
-        <keyword>
-            <string language="es">evaluación automática</string>
-        </keyword>
-        <coverage>
-            <string language="es">Educación superior, formación profesional</string>
-        </coverage>
-        <structure>
-            <source>LOMv1.0</source>
-            <value>atomic</value>
-        </structure>
-        <aggregationLevel>
-            <source>LOMv1.0</source>
-            <value>2</value>
-        </aggregationLevel>
+        <description><string language="es">Actividad interactiva para practicar y evaluar la redacción de prompts efectivos para inteligencia artificial.</string></description>
+        <keyword><string language="es">prompts</string></keyword>
+        <keyword><string language="es">inteligencia artificial</string></keyword>
+        <structure><source>LOMv1.0</source><value>atomic</value></structure>
+        <aggregationLevel><source>LOMv1.0</source><value>2</value></aggregationLevel>
     </general>
 
     <lifeCycle>
-        <version>
-            <string language="es">1.0</string>
-        </version>
-        <status>
-            <source>LOMv1.0</source>
-            <value>final</value>
-        </status>
+        <version><string language="es">2.1</string></version>
+        <status><source>LOMv1.0</source><value>final</value></status>
         <contribute>
-            <role>
-                <source>LOMv1.0</source>
-                <value>author</value>
-            </role>
-            <entity>Francisco Sereño, Damaris Reinoso (practicante)</entity>
-            <date>
-                <dateTime>2025-07-06</dateTime>
-            </date>
+            <role><source>LOMv1.0</source><value>author</value></role>
+            <entity>Francisco Sereño</entity>
+            <date><dateTime>2025-07-10</dateTime></date>
         </contribute>
     </lifeCycle>
 
     <metaMetadata>
-        <identifier>
-            <catalog>URI</catalog>
-            <entry>tutor_mo_ia_scorm_2025_metadata</entry>
-        </identifier>
         <contribute>
-            <role>
-                <source>LOMv1.0</source>
-                <value>creator</value>
-            </role>
-            <entity>Google Gemini 2.5 Pro y Claude Sonnet 4</entity>
-            <date>
-                <dateTime>2025-07-06</dateTime>
-            </date>
+            <role><source>LOMv1.0</source><value>creator</value></role>
+            <entity>Google Gemini, Claude Sonnet</entity>
+            <date><dateTime>2025-07-10</dateTime></date>
         </contribute>
         <metadataSchema>LOMv1.0</metadataSchema>
         <language>es</language>
@@ -81,85 +43,25 @@
 
     <technical>
         <format>text/html</format>
-        <size>1048576</size>
         <location>index.html</location>
-        <requirement>
-            <orComposite>
-                <type>
-                    <source>LOMv1.0</source>
-                    <value>browser</value>
-                </type>
-                <name>
-                    <source>LOMv1.0</source>
-                    <value>any</value>
-                </name>
-                <minimumVersion>HTML5</minimumVersion>
-            </orComposite>
-        </requirement>
-        <installationRemarks>
-            <string language="es">Requiere conexión a internet para funcionalidades de IA</string>
-        </installationRemarks>
-        <otherPlatformRequirements>
-            <string language="es">JavaScript habilitado, API Key de OpenAI configurada</string>
-        </otherPlatformRequirements>
-        <duration>
-            <duration>PT1H30M</duration>
-        </duration>
+        <requirement><orComposite><type><source>LOMv1.0</source><value>browser</value></type><name><source>LOMv1.0</source><value>any</value></name><minimumVersion>HTML5</minimumVersion></orComposite></requirement>
+        <otherPlatformRequirements><string language="es">JavaScript habilitado, API Key de OpenAI configurada, Conexión a Internet</string></otherPlatformRequirements>
+        <duration><duration>PT2H</duration></duration>
     </technical>
 
     <educational>
-        <interactivityType>
-            <source>LOMv1.0</source>
-            <value>active</value>
-        </interactivityType>
-        <learningResourceType>
-            <source>LOMv1.0</source>
-            <value>exercise</value>
-        </learningResourceType>
-        <interactivityLevel>
-            <source>LOMv1.0</source>
-            <value>high</value>
-        </interactivityLevel>
-        <semanticDensity>
-            <source>LOMv1.0</source>
-            <value>medium</value>
-        </semanticDensity>
-        <intendedEndUserRole>
-            <source>LOMv1.0</source>
-            <value>learner</value>
-        </intendedEndUserRole>
-        <context>
-            <source>LOMv1.0</source>
-            <value>higher education</value>
-        </context>
-        <typicalAgeRange>
-            <string language="es">18-65</string>
-        </typicalAgeRange>
-        <difficulty>
-            <source>LOMv1.0</source>
-            <value>medium</value>
-        </difficulty>
-        <typicalLearningTime>
-            <duration>PT1H30M</duration>
-        </typicalLearningTime>
-        <description>
-            <string language="es">Los estudiantes aprenderán a redactar prompts efectivos mediante práctica guiada y retroalimentación automatizada</string>
-        </description>
-        <language>es</language>
+        <interactivityType><source>LOMv1.0</source><value>active</value></interactivityType>
+        <learningResourceType><source>LOMv1.0</source><value>exercise</value></learningResourceType>
+        <interactivityLevel><source>LOMv1.0</source><value>high</value></interactivityLevel>
+        <intendedEndUserRole><source>LOMv1.0</source><value>learner</value></intendedEndUserRole>
+        <context><source>LOMv1.0</source><value>higher education</value></context>
+        <typicalLearningTime><duration>PT2H</duration></typicalLearningTime>
     </educational>
 
     <rights>
-        <cost>
-            <source>LOMv1.0</source>
-            <value>no</value>
-        </cost>
-        <copyrightAndOtherRestrictions>
-            <source>LOMv1.0</source>
-            <value>yes</value>
-        </copyrightAndOtherRestrictions>
-        <description>
-            <string language="es">Material educativo desarrollado por Francisco Sereño y Damaris Reinoso con asistencia de IA</string>
-        </description>
+        <cost><source>LOMv1.0</source><value>no</value></cost>
+        <copyrightAndOtherRestrictions><source>LOMv1.0</source><value>yes</value></copyrightAndOtherRestrictions>
+        <description><string language="es">Material educativo desarrollado por Francisco Sereño con asistencia de IA.</string></description>
     </rights>
 
 </lom>
