@@ -30,7 +30,7 @@ eval_prompt_m2/
 │   ├── config.js
 │   └── main.js
 └── css/
-└── styles.css
+    └── styles.css
 ```
 
 ## Instalación y Configuración
