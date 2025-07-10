@@ -8,7 +8,7 @@
 
 const OPENAI_CONFIG = {
     // CRÍTICO: Inserte su clave de API de OpenAI aquí.
-    apiKey: "XXX",
+    apiKey: "Inserte_aquí_su_clave_de_API",
     model: "gpt-4o-mini",
     apiUrl: "https://api.openai.com/v1/chat/completions"
 };
