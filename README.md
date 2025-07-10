@@ -18,7 +18,7 @@ Este paquete SCORM contiene una actividad interactiva diseñada para que los est
 - ✅ Envío automático de la calificación en el último intento
 
 ## Estructura del Paquete
-
+```
 eval_prompt_m2/
 ├── imsmanifest.xml
 ├── metadata.xml
@@ -31,6 +31,7 @@ eval_prompt_m2/
 │   └── main.js
 └── css/
 └── styles.css
+```
 
 ## Instalación y Configuración
 
