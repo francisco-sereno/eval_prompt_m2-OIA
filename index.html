@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Práctica de prompts con IA</title>
+    <title>¿Qué aprendimos?</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,19 +28,26 @@
     <div class="widget-container">
         <header class="widget-header">
             <div class="widget-header-content">
-                <h1 class="widget-title" id="mainTitle">Práctica de prompts</h1>
+                <h1 class="widget-title" id="mainTitle">¿Qué aprendimos?</h1>
                 <p class="widget-subtitle" id="mainSubtitle">Redacte un prompt para cumplir el objetivo y reciba una evaluación automática.</p>
             </div>
-            <div class="widget-status-indicators">
-                <div class="status-indicator" id="aiStatus">
-                    <span class="material-symbols-outlined status-icon">psychology</span>
-                    <span>IA</span>
-                    <div class="status-dot disconnected" id="aiStatusDot"></div>
+            <div class="header-right-panel">
+                <div class="widget-status-indicators">
+                    <div class="status-indicator" id="aiStatus">
+                        <span class="material-symbols-outlined status-icon">psychology</span>
+                        <span>IA</span>
+                        <div class="status-dot disconnected" id="aiStatusDot"></div>
+                    </div>
+                    <div class="status-indicator" id="scormStatus">
+                        <span class="material-symbols-outlined status-icon">school</span>
+                        <span>LMS</span>
+                        <div class="status-dot disconnected" id="scormStatusDot"></div>
+                    </div>
                 </div>
-                <div class="status-indicator" id="scormStatus">
-                    <span class="material-symbols-outlined status-icon">school</span>
-                    <span>LMS</span>
-                    <div class="status-dot disconnected" id="scormStatusDot"></div>
+                <div class="header-actions">
+                    <button id="infoButton" class="header-button" title="Información y créditos">
+                        <span class="material-symbols-outlined">info</span>
+                    </button>
                 </div>
             </div>
         </header>
@@ -104,7 +111,7 @@
                     <div class="footer-details">
                         <strong>Contenido académico y dirección de proyecto:</strong> Francisco Sereño<br>
                         <strong>Asistencia en desarrollo y IA generativa:</strong> Google Gemini & Claude Sonnet<br>
-                        Versión: 2.5 - Julio 2025 | Paquete SCORM 2004
+                        Versión: 2.8 - Julio 2025 | Paquete SCORM 2004
                     </div>
                 </div>
             </div>
@@ -112,9 +119,17 @@
 
         <div id="rubricModal" class="modal">
             <div class="modal-content">
-                <span class="modal-close">&times;</span>
+                <span class="modal-close" data-modal-id="rubricModal">&times;</span>
                 <h3 id="rubricModalTitle" class="modal-title">Pauta de evaluación</h3>
-                <div id="rubricModalBody"></div>
+                <div id="rubricModalBody" class="modal-body"></div>
+            </div>
+        </div>
+        
+        <div id="infoModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close" data-modal-id="infoModal">&times;</span>
+                <h3 id="infoModalTitle" class="modal-title"></h3>
+                <div id="infoModalBody" class="modal-body"></div>
             </div>
         </div>
     </div>
